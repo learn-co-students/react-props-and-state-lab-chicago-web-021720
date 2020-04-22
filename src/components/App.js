@@ -15,22 +15,16 @@ class App extends React.Component {
     }
   }
 
-  handleFilterChange = event => {
-    // Update state.filters.type with the selected type
-    const select = event.target  // <select> tag that was changed
-    
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        filters: {
-          ...prevState.filters,
-          type: select.options[select.selectedIndex].value
-        }
+  onChangeType = event => {
+    // Update state.filters.type with the selected type    
+    this.setState({
+      filters: {
+        type: event.target.value
       }
     })
   }
 
-  handleFindPetsClick = () => {
+  onFindPetsClick = () => {
 
     // Determine the URL for the fetch request based on the filter type
     const baseUrl = '/api/pets'
@@ -43,7 +37,7 @@ class App extends React.Component {
       .then(pets => this.setState({pets: pets}))
   }
 
-  handleAdoptPet = petId => {
+  onAdoptPet = petId => {
     // Find the matching pet in state.pets and set the isAdopted property to true.
     this.setState(prevState => {
 
@@ -67,10 +61,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters onChangeType={this.handleFilterChange} onFindPetsClick={this.handleFindPetsClick}/>
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets} onAdoptPet={this.handleAdoptPet}/>
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet}/>
             </div>
           </div>
         </div>

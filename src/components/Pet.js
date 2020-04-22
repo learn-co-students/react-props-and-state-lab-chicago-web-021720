@@ -2,7 +2,7 @@ import React from 'react'
 
 class Pet extends React.Component {
   
-  determineButton = pet => {
+  renderButton = pet => {
     if (pet.isAdopted) {
       return <button className="ui disabled button">Already adopted</button>
     } else {
@@ -11,7 +11,7 @@ class Pet extends React.Component {
   }
   
   render() {
-    const pet = this.props.pet
+    const { pet } = this.props
     return (
       <div className="card">
         <div className="content">
@@ -24,11 +24,11 @@ class Pet extends React.Component {
           </div>
           <div className="description">
             <p>Age: {pet.age}</p>
-            <p>Weight: {pet.weight}}</p>
+            <p>Weight: {pet.weight}</p>
           </div>
         </div>
         <div className="extra content">
-          {this.determineButton(pet)}
+          {this.renderButton(pet)}
         </div>
       </div>
     )
